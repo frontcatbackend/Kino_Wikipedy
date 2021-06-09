@@ -15,8 +15,9 @@ const Actor = seq.define('actor',{
     isDeath:{type: DataTypes.BOOLEAN},
     date_of_birth:{type: DataTypes.DATE,},
     date_of_death:{type: DataTypes.DATE,},
-    country_of_birth:{type: DataTypes.STRING,},
-    country_of_death:{type: DataTypes.STRING,},
+    // country_of_birth:{type: DataTypes.STRING,},
+    // country_of_death:{type: DataTypes.STRING,},
+
     
 })
 const Produsser = seq.define('produsser',{
@@ -26,8 +27,6 @@ const Produsser = seq.define('produsser',{
     isDeath:{type: DataTypes.BOOLEAN},
     date_of_birth:{type: DataTypes.DATE,},
     date_of_death:{type: DataTypes.DATE,},
-    country_of_birth:{type: DataTypes.STRING,},
-    country_of_death:{type: DataTypes.STRING,},
     
 })
 
@@ -82,7 +81,7 @@ Actor.belongsToMany(Serial, {through:"ActorsSerials"})
 Serial.belongsToMany(Actor, {through:"ActorsSerials"})
 
 //actors to country 1:m
-Actor.hasOne(Country)
+Actor.hasOne(Country, {foreignKey: "BirthCountry"})
 Country.belongsTo(Actor)
 
 //produssers to country 1:m
