@@ -1,4 +1,4 @@
-const { Actor, Movie } = require("../models/models");
+const { Actor, Movie, ActorFilms } = require("../models/models");
 
 class ActorController {
   async create(req, res, next) {
@@ -17,15 +17,21 @@ class ActorController {
 
     }
   }
+  async getOne(req, res, next) {
+    try {
+      let actor = await Actor.findByPk(req.params.id, {include: Movie});
+      return res.json(actor);
+    } catch (err) {
+
+    }
+  }
 
   async updateActor(req, res, next){
     try{
-    const id = req.params.id
-    const movies = req.body.movies
-    const updating = await Actor.update(req.body,{
-      where: {id: id},
-    })
-    res.json("Updating")
+     const {id} = req.params
+     await Actor.update(req.body, {where:{id:id}})
+     let updated = await Actor.findByPk(id, {include:[Movie]})
+     return res.json(updated)
     }catch(err){
 
     }

@@ -60,6 +60,9 @@ const Genre = seq.define('genre',{
     genre: {type: DataTypes.STRING,},
 })
 
+///////////////////
+
+
 //actors to movies, movies to actors m:m
 Actor.belongsToMany(Movie, {through: "ActorsFilms"})
 Movie.belongsToMany(Actor, {through: "ActorsFilms"})
@@ -81,7 +84,7 @@ Actor.belongsToMany(Serial, {through:"ActorsSerials"})
 Serial.belongsToMany(Actor, {through:"ActorsSerials"})
 
 //actors to country 1:m
-Actor.hasOne(Country, )
+Actor.hasOne(Country,)
 Country.belongsTo(Actor)
 
 //produssers to country 1:m
@@ -164,5 +167,5 @@ Country.belongsToMany(Serial, {through: 'SerialCountry'})
 // }
 
 module.exports = {
-   User, Produsser, Actor, Movie, Serial, Country, Genre
+   User, Produsser, Actor, Movie, Serial, Country, Genre,
 }

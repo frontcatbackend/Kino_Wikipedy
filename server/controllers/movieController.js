@@ -18,6 +18,16 @@ class MovieController {
 
     }
   }
+
+  async updateMovie(req, res, next){
+    try{
+   const update_movie = await Movie.update(req.body, {where:{id:req.params}})
+   return res.json(update_movie)
+    }catch(err){
+
+    }
+  }
+
 }
 
 
