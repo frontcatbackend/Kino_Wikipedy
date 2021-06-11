@@ -1,4 +1,4 @@
-const { Actor } = require("../models/models");
+const { Actor, Movie } = require("../models/models");
 
 class ActorController {
   async create(req, res, next) {
@@ -11,10 +11,10 @@ class ActorController {
   }
   async getAll(req, res, next) {
     try {
-      const actors = await Actor.findAll();
+      const actors = await Actor.findAll({include: Movie});
       return res.json(actors);
     } catch (err) {
-      
+
     }
   }
 }

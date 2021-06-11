@@ -81,7 +81,7 @@ Actor.belongsToMany(Serial, {through:"ActorsSerials"})
 Serial.belongsToMany(Actor, {through:"ActorsSerials"})
 
 //actors to country 1:m
-Actor.hasOne(Country, {foreignKey: "BirthCountry"})
+Actor.hasOne(Country, )
 Country.belongsTo(Actor)
 
 //produssers to country 1:m
