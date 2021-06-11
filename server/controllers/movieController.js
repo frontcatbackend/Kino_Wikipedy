@@ -3,7 +3,7 @@ const { Movie, Actor, Genre, Country, Produsser } = require("../models/models");
 class MovieController {
   async create(req, res, next) {
     try {
-      let movie = await Movie.create(req.body);
+      let movie = await Movie.create(req.body, {include:[Actor]});
       return res.json(movie);
     } catch (err) {
 

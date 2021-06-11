@@ -24,8 +24,8 @@ class ActorController {
   async updateActor(req, res, next) {
     try {
       const { id } = req.params;
-      let update_actor = await Actor.update(req.body, { where: { id: id }} ) ;
-      let create_movie = await Movie.create(req.body, req.params.id);
+      let update_actor = await Actor.update(req.body, { where: { id: id}, include:[Movie]} ) ;
+      let create_movie = await Movie.create(req.body)
       //Как добавить новый фильм к актёру?
       // await update_actor.addMovie([create_movie]) // не работает
       let updated = await Actor.findByPk(id, { include: [Movie] });
