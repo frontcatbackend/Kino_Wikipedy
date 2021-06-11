@@ -3,7 +3,7 @@ const {DataTypes} = require('sequelize')
 
 const User = seq.define('user', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    email: {type: DataTypes.STRING, unique: true,},
+    login: {type: DataTypes.STRING, unique: true,},
     password: {type: DataTypes.STRING},
     role: {type: DataTypes.STRING, defaultValue: "ADMIN"},
 })
@@ -107,62 +107,62 @@ Country.belongsToMany(Serial, {through: 'SerialCountry'})
 
 
 
-//test function
-const run = async () => {
-    //creating actor
-    const swarz = await Actor.create({
-        name: "Arnold Shwarznegger",
-        isDeath: false,
-        date_of_birth:"1947-07-30",
-    })
-    //creating produssor
-    const terminatorProdussor = await Produsser.create({name: "James Cameron"})
-    const predatorProdussor = await Produsser.create({name: "Jhon Maktirnan"})
-    //creating films
-    const terminator1 = await Movie.create({movie_name:" The Terminator"})
-    const terminator2 = await Movie.create({movie_name:" The Terminator2"})
-    const predator1 = await Movie.create({movie_name:"Predator"})
-    //creating country
-    const usa = await Country.create({country_name: "Usa"})
-    const austria = await Country.create({country_name: "Austria"})
-    //creating genre
-    const predatorGenre = await Genre.create({genre:"thriller"})
-    const terminatorGenre = await Genre.create({genre:"sci-fi"})
+// //test function
+// const run = async () => {
+//     //creating actor
+//     const swarz = await Actor.create({
+//         name: "Arnold Shwarznegger",
+//         isDeath: false,
+//         date_of_birth:"1947-07-30",
+//     })
+//     //creating produssor
+//     const terminatorProdussor = await Produsser.create({name: "James Cameron"})
+//     const predatorProdussor = await Produsser.create({name: "Jhon Maktirnan"})
+//     //creating films
+//     const terminator1 = await Movie.create({movie_name:" The Terminator"})
+//     const terminator2 = await Movie.create({movie_name:" The Terminator2"})
+//     const predator1 = await Movie.create({movie_name:"Predator"})
+//     //creating country
+//     const usa = await Country.create({country_name: "Usa"})
+//     const austria = await Country.create({country_name: "Austria"})
+//     //creating genre
+//     const predatorGenre = await Genre.create({genre:"thriller"})
+//     const terminatorGenre = await Genre.create({genre:"sci-fi"})
 
-    //connekting instances
-    //adding films to actors
-    await swarz.addMovie([terminator1, terminator2, predator1])
-    //adding country to actor
-    await swarz.setCountry(usa)
-    // adding films to produssor
-    await terminatorProdussor.addMovie([terminator1, terminator2])
-    await predatorProdussor.addMovie([predator1])
-    // adding films to country
-    await terminator1.addCountry([usa])
-    await terminator2.addCountry([usa])
-    await predator1.addCountry([usa])
-    //adding films to genre
-    await terminatorGenre.addMovie([terminator1, terminator2])
-    await predatorGenre.addMovie([predator1])
+//     //connekting instances
+//     //adding films to actors
+//     await swarz.addMovie([terminator1, terminator2, predator1])
+//     //adding country to actor
+//     await swarz.setCountry(usa)
+//     // adding films to produssor
+//     await terminatorProdussor.addMovie([terminator1, terminator2])
+//     await predatorProdussor.addMovie([predator1])
+//     // adding films to country
+//     await terminator1.addCountry([usa])
+//     await terminator2.addCountry([usa])
+//     await predator1.addCountry([usa])
+//     //adding films to genre
+//     await terminatorGenre.addMovie([terminator1, terminator2])
+//     await predatorGenre.addMovie([predator1])
     
     
-    //calling
-    const actors = await Actor.findAll({include:[Movie, Serial, Country, Genre]})
-    actors.forEach(actor => console.log(actor.toJSON()))
-    const films = await Movie.findAll({include:[Actor, Genre, Country, Produsser]})
-    films.forEach(film=> console.log(film.toJSON()))
+//     //calling
+//     const actors = await Actor.findAll({include:[Movie, Serial, Country, Genre]})
+//     actors.forEach(actor => console.log(actor.toJSON()))
+//     const films = await Movie.findAll({include:[Actor, Genre, Country, Produsser]})
+//     films.forEach(film=> console.log(film.toJSON()))
 
 
-    //adding actors to fillm 
-    await terminator1.addActor([swarz])
-    await terminator2.addActor([swarz])
-    await predator1.addActor([swarz])
+//     //adding actors to fillm 
+//     await terminator1.addActor([swarz])
+//     await terminator2.addActor([swarz])
+//     await predator1.addActor([swarz])
 
-    //adding produsser to film
-    await terminator1.addProdusser([terminatorProdussor])
+//     //adding produsser to film
+//     await terminator1.addProdusser([terminatorProdussor])
   
-}
+// }
 
 module.exports = {
-   User, Produsser, Actor, Movie, Serial, Country, Genre, run
+   User, Produsser, Actor, Movie, Serial, Country, Genre
 }
