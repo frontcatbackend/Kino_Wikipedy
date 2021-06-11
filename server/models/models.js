@@ -60,6 +60,10 @@ const Genre = seq.define('genre',{
     genre: {type: DataTypes.STRING,},
 })
 
+const ActorsFilms = seq.define('actorsFilms', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+})
+
 ///////////////////
 
 
@@ -167,5 +171,23 @@ Country.belongsToMany(Serial, {through: 'SerialCountry'})
 // }
 
 module.exports = {
-   User, Produsser, Actor, Movie, Serial, Country, Genre,
+   User, ActorsFilms, Produsser, Actor, Movie, Serial, Country, Genre,
 }
+
+
+
+
+// const swarz = await Actor.create({
+//     //         name: "Arnold Shwarznegger",
+//     //         isDeath: false,
+//     //         date_of_birth:"1947-07-30",
+//     //     })
+
+// const terminator1 = await Movie.create({movie_name:" The Terminator"})
+// const terminator2 = await Movie.create({movie_name:" The Terminator2"})
+// const predator1 = await Movie.create({movie_name:"Predator"})
+
+// await swarz.addMovie([terminator1, terminator2, predator1])
+
+// const actors = await Actor.findAll({include:[Movie, Serial, Country, Genre]})
+// //     actors.forEach(actor => console.log(actor.toJSON()))
